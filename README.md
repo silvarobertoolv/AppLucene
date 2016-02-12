@@ -1,0 +1,1 @@
+# AppLucene teste proj
