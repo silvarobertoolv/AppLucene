@@ -35,7 +35,8 @@ public class HttpURLConnectionAPI {
     // HTTP GET request
     private void sendGet() throws Exception {
 
-        String url = "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=84";
+        String url = "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=65";
+        //http://compras.dados.gov.br/materiais/v1/materiais.json
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -60,7 +61,7 @@ public class HttpURLConnectionAPI {
 
         }
         in.close();
-
+/*
         String texto = response.toString();
         String result = null;
          for (i = 0; i <= texto.length(); i++) {
@@ -71,7 +72,7 @@ public class HttpURLConnectionAPI {
                 }
 
             }
-         System.out.println(result);
+         System.out.println(result); */
         System.out.println(response.toString());
 
     }
