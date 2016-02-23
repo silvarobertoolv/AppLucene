@@ -14,6 +14,7 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -62,16 +63,17 @@ public class HttpURLConnectionAPI {
         in.close();
 
         String texto = response.toString();
-        String result = null;
+        char[] result = new char[texto.length()];
          for (i = 0; i <= texto.length(); i++) {
                 if (texto.charAt(i) == ',') {
-                result= result + texto.charAt(i)+"\n";
+                    
+                result[i]= '\n';
                 } else {
-                    result= result + texto.charAt(i);
+                      result[i]= texto.charAt(i);
                 }
 
             }
-         System.out.println(result);
+         System.out.println(Arrays.toString(result));
         System.out.println(response.toString());
 
     }
