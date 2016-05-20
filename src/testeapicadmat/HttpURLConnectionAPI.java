@@ -10,7 +10,9 @@ package testeapicadmat;
  * @author roliveira
  */
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,7 +38,8 @@ public class HttpURLConnectionAPI {
     // HTTP GET request
     private void sendGet() throws Exception {
 
-        String url = "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=84";
+        String url = "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=65";
+        //http://compras.dados.gov.br/materiais/v1/materiais.json
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -55,26 +58,30 @@ public class HttpURLConnectionAPI {
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
-        int i = 0;
+        Long i = new Long(0);
         while ((inputLine = in.readLine()) != null) {
            response.append(inputLine);
 
         }
         in.close();
+        
+        BufferedWriter  arquivo = new BufferedWriter(new FileWriter ("I://cadmat.txt"));
+        arquivo.write(response.toString());
 
-        String texto = response.toString();
+        /*String texto = response.toString();
         char[] result = new char[texto.length()];
-         for (i = 0; i <= texto.length(); i++) {
+         for (; i <= texto.length(); i++) {
                 if (texto.charAt(i) == ',') {
                     
-                result[i]= '\n';
+                result[i]= '\r';
                 } else {
                       result[i]= texto.charAt(i);
                 }
 
             }
-         System.out.println(Arrays.toString(result));
-        System.out.println(response.toString());
+         System.out.println(result);
+       //System.out.println(response.toString());
+*/
 
     }
 
