@@ -12,11 +12,16 @@ package testeapicadmat;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.zip.ZipInputStream;
+import java.util.zip.ZipOutputStream;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -38,7 +43,9 @@ public class HttpURLConnectionAPI {
     // HTTP GET request
     private void sendGet() throws Exception {
 
-        String url = "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=65";
+        String url =   "http://compras.dados.gov.br/materiais/v1/materiais.json?grupo=65";
+        
+        
         //http://compras.dados.gov.br/materiais/v1/materiais.json
 
         URL obj = new URL(url);
@@ -63,11 +70,23 @@ public class HttpURLConnectionAPI {
            response.append(inputLine);
 
         }
-        in.close();
-        
-        BufferedWriter  arquivo = new BufferedWriter(new FileWriter ("I://cadmat.txt"));
-        arquivo.write(response.toString());
 
+        
+           InputStream inzip =  con.getInputStream();
+            //System.out.println(inzip.available());
+  
+            FileOutputStream out = new FileOutputStream("I:\\tmppdf\\cvm.zip");
+            byte[] buff = new byte[4096];
+            int len = 0;
+            while ((len = inzip.read(buff)) != -1) {
+                out.write(buff, 0, len);
+            }
+        
+        
+        
+        BufferedWriter  arquivo = new BufferedWriter(new FileWriter ("I://cvm.txt"));
+        arquivo.write(response.toString());
+           in.close();
         /*String texto = response.toString();
         char[] result = new char[texto.length()];
          for (; i <= texto.length(); i++) {
